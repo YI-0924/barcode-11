@@ -50,9 +50,6 @@ int main(){
 						int dir=direction(a,m);		//check direction + reverse
 						if(dir==0){		//bad code	
 							printf("Case %d: bad code4\n",time);
-							for(int i=0;i<m;i++){
-								printf("%d ",a[i]);
-							}puts("");
 						}
 						else{
 							if(checkspace(a,m)!=-1){		//whether every space are 0
@@ -61,6 +58,9 @@ int main(){
 								int result=decode(a,d,m,n);		//decode characters
 								if(result==-1){
 									printf("Case %d: bad code5\n",time);
+									for(int i=0;i<m;i++){
+										printf("%d ",a[i]);
+									}puts("");
 									//break;
 								}
 								else{
@@ -94,7 +94,7 @@ int main(){
 	}
 	fclose(ptr);
 } 
-int deviation(int a[],int b[],int m){		//not sure?		//return 1 if ok   -1 if bad code
+int deviation(int a[],int b[],int m){		//return 1 if ok   -1 if bad code
 	int nrwmin=a[0],widmin=0,widmax=0;
 	double mid=0;		
 	for(int i=0;i<m;i++){
@@ -106,7 +106,6 @@ int deviation(int a[],int b[],int m){		//not sure?		//return 1 if ok   -1 if bad
 		}
 	}
 	mid=(nrwmin+widmax)/2.0;
-	printf("%f%d%d",mid,nrwmin,widmax);
 	for(int i=0;i<m;i++){
 		if(b[i]<mid){
 			b[i]=b[i]*2;
@@ -125,7 +124,7 @@ int deviation(int a[],int b[],int m){		//not sure?		//return 1 if ok   -1 if bad
 	}
 	else{
 		for(int i=0;i<m;i++){
-			if(a[i]<widmin){
+			if(a[i]<mid){
 				a[i]=0;
 			}
 			else{
