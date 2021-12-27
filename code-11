@@ -21,7 +21,7 @@ int main(){
 		fscanf(ptr,"%d",&m);
 		while(m!=0){
 			if(m>150||m<29||(m-29)%6!=0){
-				printf("Case %d: bad code1\n",time);
+				printf("Case %d: bad code\n",time);
 				//fscanf(ptr,"%d",&m);
 				//time++;
 				//continue;
@@ -33,7 +33,7 @@ int main(){
 				for(int i=0;i<m;i++){		//input the values 
 					fscanf(ptr,"%d",&a[i]);		
 					if(a[i]<1||a[i]>200){
-						printf("Case %d: bad code2\n",time);
+						printf("Case %d: bad code\n",time);
 						break;		
 					}
 					else{
@@ -43,13 +43,13 @@ int main(){
 				if(b[m-1]!=0){
 					int convert=deviation(a,b,m);		//deviation processing + convert to 0、1 
 					if(convert==-1){
-						printf("Case %d: bad code3\n",time);
+						printf("Case %d: bad code\n",time);
 						//continue;
 					}
 					else{		//now value in a[] are 0 and 1
 						int dir=direction(a,m);		//check direction + reverse
 						if(dir==0){		//bad code	
-							printf("Case %d: bad code4\n",time);
+							printf("Case %d: bad code\n",time);
 						}
 						else{
 							if(checkspace(a,m)!=-1){		//whether every space are 0
@@ -57,10 +57,7 @@ int main(){
 								memset(d,0,(n+2)*sizeof(int));
 								int result=decode(a,d,m,n);		//decode characters
 								if(result==-1){
-									printf("Case %d: bad code5\n",time);
-									for(int i=0;i<m;i++){
-										printf("%d ",a[i]);
-									}puts("");
+									printf("Case %d: bad code\n",time);
 									//break;
 								}
 								else{
@@ -82,7 +79,7 @@ int main(){
 								}
 							}
 							else{
-									printf("Case %d: bad code6\n",time);
+									printf("Case %d: bad code\n",time);
 							}
 						}
 					}
@@ -177,9 +174,9 @@ int checkspace(int a[],int m){		//return 0 if ok    -1 if bad code
 	return 0;
 }
 int decode(int a[],int d[],int m,int n){		//convert to decimal then to characters		//return -1 if bad code
-	int i=0;
 	int j=0;
-	for(i=0;i<m-5;i=i+6){
+	int i=0;
+	for(i=6;i<=m-11;i=i+6){
 		if(a[i+4]==1){
 			d[j]=1;
 		}
@@ -197,7 +194,7 @@ int decode(int a[],int d[],int m,int n){		//convert to decimal then to character
 		}
 		j++;
 	}
-	for(int j=0;j<n+2;j++){
+	for(j=0;j<n+2;j++){
 		switch(d[j]){		
 			case 16:
 				d[j]=0;
@@ -231,6 +228,9 @@ int decode(int a[],int d[],int m,int n){		//convert to decimal then to character
 				break;
 			case 4:
 				d[j]=-1;		//-1 means "-"
+				break;
+			case 6:
+				d[j]=-2;		//start stop
 				break;
 			default:
 				return -1;
