@@ -63,7 +63,12 @@ int main(){
 								else{
 									int c=checkC(d,n);
 									if(c==-1){
-										printf("Case %d: bad C\n",time);
+										if(m<29){
+											printf("Case %d: bad code\n",time);
+										}
+										else{
+											printf("Case %d: bad C\n",time);
+										}
 										//break;
 									}
 									else{
