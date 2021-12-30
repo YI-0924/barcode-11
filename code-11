@@ -14,13 +14,13 @@ int main(){
 	int m;
 	int time=1;
 	FILE *ptr=NULL;
-	if((ptr=fopen("testcase.txt","r"))==NULL){
+	if((ptr=fopen("test.txt","r"))==NULL){
 		puts("Couldn't open the file");
 	}
 	else{
 		fscanf(ptr,"%d",&m);
 		while(m!=0){
-			if(m>150||m<29||(m-29)%6!=0){
+			if(m>150||(m-29)%6!=0){
 				printf("Case %d: bad code\n",time);
 				fscanf(ptr,"%d",&m);
 				time++;
@@ -92,7 +92,7 @@ int main(){
 	fclose(ptr);
 } 
 int deviation(int a[],int b[],int m){		//return 1 if ok   -1 if bad code
-	int nrwmin=a[0],widmin=0,widmax=0;
+	int nrwmin=a[0],widmin=200,widmax=0;
 	double mid=0;		
 	for(int i=0;i<m;i++){
 		if(a[i]<nrwmin){
@@ -118,13 +118,11 @@ int deviation(int a[],int b[],int m){		//return 1 if ok   -1 if bad code
 		if(b[i]<mid){
 			b[i]=b[i]*2;
 		}
-		if(b[i]>widmin){
-			if(b[i]>widmax){
-				widmax=b[i];
-			}
-			else{
-				widmin=b[i];
-			}
+		if(b[i]>widmax){
+			widmax=b[i];
+		}
+		if(b[i]<widmin){
+			widmin=b[i];
 		}
 	}
 	if(widmax*0.95>widmin*1.05){
